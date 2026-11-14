@@ -1,28 +1,27 @@
 name: Feature Request
-description: File a feature request
+description: Suggest a feature for Babel NS2
 labels: "request"
 body:
   - type: markdown
     attributes:
-      value: Tech support does not belong here. You should only file an issue here if you are requesting a feature you believe would make Eden better.
+      value: Describe a Babel-specific feature. For upstream Eden requests, use the relevant upstream project's own channels.
   - type: checkboxes
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the feature you are requesting.
+      label: Existing request
       options:
-      - label: I have searched the existing issues
-        required: true
+        - label: I have searched existing Babel NS2 issues
+          required: true
   - type: textarea
     id: what-feature
     attributes:
-      label: What feature are you suggesting?
-      description: A brief description of the requested feature.
+      label: Proposed feature
+      description: What should Babel NS2 do?
     validations:
       required: true
   - type: textarea
     id: why-feature
     attributes:
-      label: Why would this feature be useful?
-      description: A brief description of why this feature would make Eden better.
+      label: Use case
+      description: Why would this be useful, particularly for Babel's Android distribution?
     validations:
       required: true
