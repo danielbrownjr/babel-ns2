@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.yuzu.yuzu_emu.R
 import org.yuzu.yuzu_emu.model.DriverViewModel
+import org.yuzu.yuzu_emu.BuildConfig
 import org.yuzu.yuzu_emu.model.Game
 import java.io.File
 import kotlin.coroutines.resume
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 
 object CustomSettingsHandler {
-    const val CUSTOM_CONFIG_ACTION = "dev.eden.eden_emulator.LAUNCH_WITH_CUSTOM_CONFIG"
+    const val CUSTOM_CONFIG_ACTION = BuildConfig.APPLICATION_ID + ".LAUNCH_WITH_CUSTOM_CONFIG"
     const val EXTRA_TITLE_ID = "title_id"
     const val EXTRA_CUSTOM_SETTINGS = "custom_settings"
 

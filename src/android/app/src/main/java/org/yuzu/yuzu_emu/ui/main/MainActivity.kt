@@ -26,6 +26,7 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
+import org.yuzu.yuzu_emu.BuildConfig
 import org.yuzu.yuzu_emu.NativeLibrary
 import org.yuzu.yuzu_emu.R
 import org.yuzu.yuzu_emu.databinding.ActivityMainBinding
@@ -163,8 +164,12 @@ class MainActivity : AppCompatActivity(), ThemeProvider {
         val firstTimeSetup = PreferenceManager.getDefaultSharedPreferences(applicationContext)
                 .getBoolean(Settings.PREF_FIRST_APP_LAUNCH, true)
 
-        if (!firstTimeSetup && NativeLibrary.isUpdateCheckerEnabled() && BooleanSetting.ENABLE_UPDATE_CHECKS.getBoolean()) {
-             checkForUpdates()
+        if (BuildConfig.ENABLE_APP_UPDATES &&
+            !firstTimeSetup &&
+            NativeLibrary.isUpdateCheckerEnabled() &&
+            BooleanSetting.ENABLE_UPDATE_CHECKS.getBoolean()
+        ) {
+            checkForUpdates()
         }
         setInsets()
         applyFullscreenPreference()

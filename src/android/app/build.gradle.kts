@@ -69,6 +69,7 @@ android {
         targetSdk = 36
         versionName = getGitVersion()
         versionCode = autoVersion
+        buildConfigField("boolean", "ENABLE_APP_UPDATES", "true")
 
         externalNativeBuild {
             cmake {
@@ -105,7 +106,16 @@ android {
     }
 
     val keystoreFile = System.getenv("ANDROID_KEYSTORE_FILE")
+    val babelKeystoreFile = System.getenv("BABEL_KEYSTORE_FILE")
     signingConfigs {
+        if (babelKeystoreFile != null) {
+            create("babel") {
+                storeFile = file(babelKeystoreFile)
+                storePassword = System.getenv("BABEL_KEYSTORE_PASS")
+                keyAlias = System.getenv("BABEL_KEY_ALIAS")
+                keyPassword = System.getenv("BABEL_KEY_PASS") ?: System.getenv("BABEL_KEYSTORE_PASS")
+            }
+        }
         if (keystoreFile != null) {
             create("release") {
                 storeFile = file(keystoreFile)
@@ -129,11 +139,8 @@ android {
     buildTypes {
         // Signed by release key, allowing for upload to Play Store.
         release {
-            signingConfig = if (keystoreFile != null) {
-                signingConfigs.getByName("release")
-            } else {
-                signingConfigs.getByName("default")
-            }
+            // Release signing is selected per flavor so Babel never uses an Eden key.
+            signingConfig = null
 
             if (isNightly) {
                 applicationIdSuffix = ".nightly"
@@ -185,6 +192,24 @@ android {
     // this should be "Eden <flavorName>"
     flavorDimensions.add("version")
     productFlavors {
+        create("babel") {
+            dimension = "version"
+            minSdk = 33
+            applicationId = "dev.techbenders.babelns2"
+            buildConfigField("boolean", "ENABLE_APP_UPDATES", "false")
+            manifestPlaceholders += mapOf("appNameBase" to "Babel NS2")
+            signingConfig = if (babelKeystoreFile != null) signingConfigs.getByName("babel") else null
+
+            externalNativeBuild {
+                cmake {
+                    arguments.add("-DENABLE_UPDATE_CHECKER=OFF")
+                }
+            }
+            ndk {
+                abiFilters += listOf("arm64-v8a")
+            }
+        }
+
         create("mainline") {
             dimension = "version"
             isDefault = true
@@ -265,18 +290,30 @@ android {
     }
 
     productFlavors.all {
+        if (name != "babel") {
+            signingConfig = signingConfigs.getByName(if (keystoreFile != null) "release" else "default")
+        }
         val currentName = manifestPlaceholders["appNameBase"] as? String ?: "Eden"
         val suffix = if (isNightly) " Nightly" else ""
 
         // apply nightly suffix I/A
         resValue("string", "app_name_suffixed", "$currentName$suffix")
-        resValue("string", "app_name", "Eden$suffix")
+        resValue("string", "app_name", if (name == "babel") "Babel NS2" else "Eden$suffix")
     }
 
     sourceSets {
         named("main") {
             java.srcDir("${edenDir}/externals/generated/sdl/java")
             kotlin.srcDir("${edenDir}/externals/generated/sdl/java")
+        }
+    }
+}
+
+androidComponents {
+    beforeVariants(selector().withFlavor("version" to "babel")) { variant ->
+        // M0 has one stable release identity; upstream nightly packaging remains available.
+        if (providers.gradleProperty("nightly").orNull?.toBooleanStrictOrNull() == true) {
+            variant.enable = false
         }
     }
 }
