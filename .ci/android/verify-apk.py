@@ -33,6 +33,18 @@ def run(tool, *args, check=True):
     return result
 
 
+def verify_signing_identity(output):
+    """Match only actual apksigner certificate and signer-count lines."""
+    digests = re.findall(
+        r"^Signer #(\d+) certificate SHA-256 digest: ([0-9a-fA-F]{64})$",
+        output, flags=re.MULTILINE,
+    )
+    require([(number, digest.lower()) for number, digest in digests] ==
+            [("1", CERTIFICATE_SHA256)], "Wrong signing identity")
+    signer_counts = re.findall(r"^Number of signers: (\d+)$", output, flags=re.MULTILINE)
+    require(signer_counts == ["1"], "Unexpected signer count")
+
+
 def inspect(apk, signed):
     manifest = ET.fromstring(run("apkanalyzer", "manifest", "print", apk).stdout)
     require(manifest.get("package") == PACKAGE, "Unexpected application ID")
@@ -56,6 +68,7 @@ def inspect(apk, signed):
     with zipfile.ZipFile(apk) as archive:
         require(archive.testzip() is None, "ZIP CRC failure")
         names = archive.namelist()
+        require(len(names) == len(set(names)), "Duplicate ZIP entries")
         libraries = [n for n in names if n.startswith("lib/") and n.endswith(".so")]
         require("lib/arm64-v8a/libyuzu-android.so" in libraries, "Missing linked emulator library")
         require({n.split("/")[1] for n in libraries} == {"arm64-v8a"}, "Unexpected native ABI")
@@ -74,8 +87,7 @@ def inspect(apk, signed):
     signature = run("apksigner", "verify", "--verbose", "--print-certs", apk, check=False)
     if signed:
         require(signature.returncode == 0, "Signature verification failed")
-        require(f"Signer #1 certificate SHA-256 digest: {CERTIFICATE_SHA256}" in signature.stdout, "Wrong signing identity")
-        require("Number of signers: 1" in signature.stdout, "Unexpected signer count")
+        verify_signing_identity(signature.stdout)
         schemes = run("apksigner", "verify", "--verbose", "--min-sdk-version", "24", apk).stdout
         for version in (2, 3):
             require(f"Verified using v{version} scheme (APK Signature Scheme v{version}): true" in schemes, f"v{version} verification failed")

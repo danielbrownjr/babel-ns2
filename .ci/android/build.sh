@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 # SPDX-FileCopyrightText: Copyright 2026 Eden Emulator Project
 # SPDX-License-Identifier: GPL-3.0-or-later
@@ -104,10 +105,10 @@ if [ "$FLAVOR" = "Babel" ]; then
     cd "$REPO_ROOT/src/android"
     export CMAKE_BUILD_PARALLEL_LEVEL=2
     ./gradlew :app:assembleBabelRelease --no-daemon --max-workers=2 --console=plain --stacktrace \
-        '-Dorg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8'
+        '-Dorg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8' || exit 1
     python3 "$REPO_ROOT/.ci/android/verify-apk.py" --unsigned \
-        app/build/outputs/apk/babel/release/app-babel-release-unsigned.apk
-    exit 0
+        app/build/outputs/apk/babel/release/app-babel-release-unsigned.apk || exit 1
+    exit
 fi
 
 export CMAKE_BUILD_PARALLEL_LEVEL="${NUM_JOBS}"
