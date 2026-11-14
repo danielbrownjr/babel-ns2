@@ -1,0 +1,76 @@
+{
+  "recorded_date": "2026-11-14",
+  "source": {
+    "base_commit": "34ae209250c41fdd185ea1a04e12e32f31802ea2",
+    "exact_original_build_commit": null,
+    "explanation": "Built from this base plus the following five uncommitted files; there was no single commit containing the complete original build source.",
+    "uncommitted_source_sha256": {
+      "src/android/app/build.gradle.kts": "454f0f4d7a5da19fc58d6ec333a60193ceceeb596d198c1fba1935b93775d4df",
+      "src/android/app/src/main/AndroidManifest.xml": "91b8d390a2097f2820616cbd5b9a34eb985ac6f1b45f4de09b0c935574253cbc",
+      "src/android/app/src/babel/AndroidManifest.xml": "f498a168bc904e2541b3d0c10afd5a27ed5f029ad0769213b8e154b30e250bb8",
+      "src/android/app/src/main/java/org/yuzu/yuzu_emu/utils/CustomSettingsHandler.kt": "19427e86123df3734edb5ab33372e33fb11db5113dfea187bddce9a41d222495",
+      "src/android/app/src/main/java/org/yuzu/yuzu_emu/ui/main/MainActivity.kt": "5cbd573e491bceff866b86fda71154e1c04f1e784c90bfe3839ec433b4d56310"
+    }
+  },
+  "host": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "architecture": "x86_64",
+    "logical_cpus": 4
+  },
+  "toolchain": {
+    "java": "Eclipse Temurin 17.0.21+9",
+    "gradle_wrapper": "8.13",
+    "android_gradle_plugin": "8.9.1",
+    "kotlin_android_plugin": "1.9.20",
+    "android_sdk_platform": 36,
+    "android_sdk_platform_revision": 2,
+    "installed_build_tools": [
+      "35.0.0",
+      "36.0.0"
+    ],
+    "inspection_build_tools": "36.0.0",
+    "ndk": "28.2.13676358 (r28c)",
+    "ndk_clang": "19.0.1",
+    "cmake": "3.31.5",
+    "ninja": "1.10.2",
+    "command_line_tools": "23.0",
+    "android_cli": "1.1.16919734",
+    "platform_tools": "37.0.1",
+    "glslang": "16.2.0",
+    "spirv_tools": "2026.1"
+  },
+  "build": {
+    "variant": "babelRelease",
+    "abi": "arm64-v8a",
+    "native_api": 33,
+    "native_cmake_configuration": "RelWithDebInfo",
+    "working_directory": "src/android",
+    "environment": {
+      "CMAKE_BUILD_PARALLEL_LEVEL": "2"
+    },
+    "command": "./gradlew :app:assembleBabelRelease --no-daemon --max-workers=2 --console=plain --stacktrace -Dorg.gradle.jvmargs='-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8'",
+    "result": "BUILD SUCCESSFUL in 30m 54s; 56 actionable tasks executed"
+  },
+  "unsigned_apk": {
+    "version_name": "34ae209250",
+    "version_code": 34306442,
+    "package": "dev.techbenders.babelns2",
+    "sha256": "68afcc171d8036be70e71a2184f4390d63a1345dc56325d180284b497098a19d",
+    "bytes": 29751785
+  },
+  "signed_apk": {
+    "sha256": "43471502fe4550b2ce664651268954683b45c8ec1388d908cff845f9a6e52a25",
+    "bytes": 29764037,
+    "certificate_sha256": "5e7392d71e02eb15b8f2a5ba8aab70c2e20dfbfe3d3099d7734d2ef69f6400bf",
+    "v2_verified": true,
+    "v3_verified": true,
+    "payload_identical_to_unsigned": true,
+    "drive_url": "https://drive.google.com/file/d/1paoMbxBuSR5hPOoZO2RlCnHRPOcaz_ej/view"
+  },
+  "evidence_links": {
+    "original_build_report": "https://drive.google.com/file/d/1Uq08Hc84anoDZExl54_WMt0PZtivKvBz/view",
+    "original_checksums": "https://drive.google.com/file/d/1QaGrjD3uoGgtmYd2zbm8YGe2SNufjJY0/view",
+    "artifact_folder": "https://drive.google.com/drive/folders/1pAPSHrcF9uXdAyVkypuM5OVREr0O-KDn"
+  },
+  "device_evidence": "User reported installation and expected initial startup on Odin 3. No captured device logs, game dump, game boot, or later-commit device validation."
+}

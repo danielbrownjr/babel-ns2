@@ -1,10 +1,10 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 # SPDX-FileCopyrightText: Copyright 2026 Eden Emulator Project
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 NUM_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
-export CMAKE_BUILD_PARALLEL_LEVEL="${NUM_JOBS}"
 ARTIFACTS_DIR="$PWD/artifacts"
 
 : "${CCACHE:=false}"
@@ -24,16 +24,17 @@ Options:
     -r, --release        	Enable update checker. If set, sets the DEVEL bool variable to false.
                          	By default, DEVEL is true.
     -t, --target <FLAVOR> 	Build flavor (variable: TARGET)
-                          	Valid values are: legacy, optimized, standard, chromeos
+                            Valid values are: babel, legacy, optimized, standard, chromeos
                           	Default: standard
     -b, --build-type <TYPE>	Build type (variable: TYPE)
                           	Valid values are: Release, RelWithDebInfo, Debug
-                          	Default: Debug
+                            Default: Release
     -n, --nightly           Create a nightly build.
 
 Extra arguments are passed to CMake (e.g. -DCMAKE_OPTION_NAME=VALUE)
 Set the CCACHE variable to "true" to enable build caching.
-The APK and AAB will be output into "artifacts".
+Babel Release builds an unsigned APK in src/android/app/build/outputs/apk/babel/release.
+Other flavors output APK and AAB into "artifacts".
 
 EOF
 
@@ -77,6 +78,7 @@ done
 TARGET_LOWER=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
 case "$TARGET_LOWER" in
+    babel) FLAVOR=Babel ;;
 	legacy) FLAVOR=Legacy ;;
 	optimized) FLAVOR=GenshinSpoof ;;
 	standard) FLAVOR=Mainline ;;
@@ -88,6 +90,28 @@ case "$TYPE" in
 	RelWithDebInfo|Release|Debug) ;;
 	*) die "Invalid build type $TYPE."
 esac
+
+if [ "$FLAVOR" = "Babel" ]; then
+    [ "$TYPE" = "Release" ] || die "The preserved Babel workflow requires Release."
+    [ "${NIGHTLY:-false}" != "true" ] || die "Babel nightly builds are not supported."
+    [ "$DEVEL" = "true" ] || die "Babel builds keep the upstream updater disabled; omit -r."
+    [ "$CCACHE" = "false" ] || die "The preserved Babel workflow does not enable ccache."
+    [ "$#" -eq 0 ] || die "Use Gradle directly for custom CMake options."
+    [ -z "${BABEL_KEYSTORE_FILE:-}" ] || die "This workflow produces unsigned APKs; keep signing external."
+    for tool in java python3 apkanalyzer apksigner zipalign glslangValidator; do
+        command -v "$tool" >/dev/null 2>&1 || die "Required tool not on PATH: $tool"
+    done
+    REPO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
+    cd "$REPO_ROOT/src/android"
+    export CMAKE_BUILD_PARALLEL_LEVEL=2
+    ./gradlew :app:assembleBabelRelease --no-daemon --max-workers=2 --console=plain --stacktrace \
+        '-Dorg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8' || exit 1
+    python3 "$REPO_ROOT/.ci/android/verify-apk.py" --unsigned \
+        app/build/outputs/apk/babel/release/app-babel-release-unsigned.apk || exit 1
+    exit
+fi
+
+export CMAKE_BUILD_PARALLEL_LEVEL="${NUM_JOBS}"
 
 LOWER_FLAVOR=$(echo "$FLAVOR" | sed 's/./\L&/')
 LOWER_TYPE=$(echo "$TYPE" | sed 's/./\L&/')
