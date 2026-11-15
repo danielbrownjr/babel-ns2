@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.google.android.material.transition.MaterialSharedAxis
+import org.yuzu.yuzu_emu.BuildConfig
 import org.yuzu.yuzu_emu.HomeNavigationDirections
 import org.yuzu.yuzu_emu.R
 import org.yuzu.yuzu_emu.databinding.FragmentAboutBinding
@@ -58,12 +59,16 @@ class AboutFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
+        if (BuildConfig.FLAVOR == "babel") {
+            binding.imageLogo.setImageResource(R.mipmap.ic_launcher)
+        }
         binding.imageLogo.setOnLongClickListener {
-            Toast.makeText(
-                requireContext(),
-                R.string.gaia_is_not_real,
-                Toast.LENGTH_SHORT
-            ).show()
+            val message = if (BuildConfig.FLAVOR == "babel") {
+                R.string.babel_logo_easter_egg
+            } else {
+                R.string.gaia_is_not_real
+            }
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             true
         }
 

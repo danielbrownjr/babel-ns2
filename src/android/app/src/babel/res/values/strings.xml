@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Babel-only display copy. Do not rename upstream resource identifiers or internal data paths. -->
+    <string name="app_notification_channel_name" translatable="false">Babel NS2</string>
+    <string name="app_notification_channel_description">Babel NS2 emulator notifications</string>
+    <string name="app_notification_running">Babel NS2 is running</string>
+    <string name="welcome_description">Learn how to set up &lt;b>Babel NS2&lt;/b> and jump into emulation.</string>
+    <string name="select_games_folder_description">Allows Babel NS2 to populate the games list</string>
+    <string name="open_user_folder">Open app data folder</string>
+    <string name="open_user_folder_description">Manage emulator internal files</string>
+    <string name="notification_no_directory_link">Could not open app data folder</string>
+    <string name="share_log_description">Share the Babel NS2 log file to debug issues</string>
+    <string name="share_gpu_log_description">Share the Babel NS2 GPU log file to debug graphics issues</string>
+    <string name="manage_yuzu_data">Manage Babel NS2 data</string>
+    <string name="contributors_description">Contributors to the upstream Eden emulator</string>
+    <string name="licenses_description">Open-source projects used by Babel NS2</string>
+    <string name="invalid_yuzu_backup">Invalid emulator backup</string>
+    <string name="log_filter_description">Controls Babel NS2 log categories. Example: *:Info Service.LM:Debug</string>
+    <string name="driver_shader_wipe_dialog_message">Babel NS2 has automatically cleared all shader caches to maintain Vulkan pipeline validation. This is required when switching GPU drivers to prevent crashes and graphical corruption. You may experience some stuttering as shaders rebuild.</string>
+    <string name="eden_theme">Eden (original)</string>
+    <string name="github_link" translatable="false">https://github.com/danielbrownjr/babel-ns2</string>
+</resources>

@@ -1,41 +1,31 @@
-# Eden Build Documentation
+# Babel NS2 development documentation
 
-Are you just a casual user? Take a look at our [User Handbook](./user) then!
+Babel is an independent downstream distribution of Eden NS2, initially concentrating on Android ARM64 and Snapdragon/Adreno compatibility. Start with the [project README](../README.md), [upstream lineage and integration policy](UPSTREAM.md), and [branding provenance](branding/README.md).
 
-If you want to register/signup as a contributor, take a gander at [CONTRIBUTING.md](../CONTRIBUTING.md).
+## Android and NS2 work
 
-This contains documentation created by developers, build instructions, guidelines, instructions/layouts for [cool stuff we made](./CPMUtil.md), and more.
+- [Android build guide](build/Android.md) - Babel unsigned ARM64 release workflow and APK verification; signing and device acceptance remain separate
+- [Eden NS2 experimental work log](ns2/NOTES.md) - historical upstream evidence, **not Babel Android compatibility results**
+- [General build instructions](Build.md) - primarily upstream
+- [Dependencies](Deps.md), [CMake options](Options.md), and [cross compilation](CrossCompile.md) - inherited technical references
+- [Platform caveats](Caveats.md), [debugging](Debug.md), and [driver bugs](DriverBugs.md)
 
-- **[General Build Instructions](./Build.md)**
-- **[CMake Options](./Options.md)**
-- **[Cross Compiling](./CrossCompile.md)**
-- **[Development Guidelines](./Development.md)**
-- **[Dependencies](./Deps.md)**
-- **[Debug Guidelines](./Debug.md)**
-  - **[RenderDoc](./Debug.md#renderdoc)**
-- **[CPM - CMake Package Manager](./CPMUtil.md)**
-- **[Platform-Specific Caveats](./Caveats.md)**
-- **[The NVIDIA SM86 (Maxwell) GPU](./NvidiaGpu.md)**
-- **[Driver Bugs](./DriverBugs.md)**
-- **[Building Older Commits](./build/OlderCommits.md)**
-- Subsystems:
-  - **[Design Overview](./DesignOverview.md)**
-  - **[Dynarmic](./dynarmic/README.md)**
-  - **[HOS Kernel](./HosKernel.md)**
-  - **[Settings](./Settings.md)**
+## Engineering references
 
-## Policies
+- [Development guidelines](Development.md)
+- [Design overview](DesignOverview.md)
+- [Dynarmic](dynarmic/README.md)
+- [HOS kernel](HosKernel.md)
+- [Settings](Settings.md)
+- [CPM utilities](CPMUtil.md)
 
-Policies and information on development.
+## Policies and contributor information
 
-- **[AI and LLM Usage](./policies/AI.md)**
-- **[Coding guidelines](./policies/Coding.md)**
-- **[Contributing](../CONTRIBUTING.md)**
+- [Contribution guidelines](../CONTRIBUTING.md)
+- [AI assistance policy](policies/AI.md)
+- [Coding guidelines](policies/Coding.md)
+- [Agent instructions](../AGENTS.md)
 
-## Externals
+## Inherited documentation
 
-Other useful resources in general, take a quick read if you need.
-
-- **[SwitchBrew](https://switchbrew.org/wiki/Main_Page)**
-- **[IPS file format](https://zerosoft.zophar.net/ips.php)**
-- **[IPSwitch file format](https://github.com/3096/ipswitch)**
+The [upstream Eden README](README.upstream.md) and [user handbook](user/README.md) are retained for technical context and original contributor credit. References to Eden's releases, community, services, and performance claims apply to Eden unless independently verified for Babel. Do not treat them as Babel support or distribution channels.

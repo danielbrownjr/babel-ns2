@@ -1,0 +1,127 @@
+[
+  {
+    "file": "README.md",
+    "bytes": 1799,
+    "sha256": "9f9583a39ad9ac46319ac0c6eeb213db2a41effa4f90b0ddfc3f2a99a0af9cbe"
+  },
+  {
+    "file": "app/src/main/res/drawable-nodpi/ic_launcher_background.png",
+    "bytes": 6493,
+    "sha256": "55d1e11e2e63bde27ab7e42d03b36008d5458ad589f2087c58f41dd9004e0c31"
+  },
+  {
+    "file": "app/src/main/res/drawable-nodpi/ic_launcher_foreground.png",
+    "bytes": 35952,
+    "sha256": "c045b1c0f620af2c136f4379577ff1cdd2e39f8bee82f4f8b2f7e13f5c02729a"
+  },
+  {
+    "file": "app/src/main/res/drawable-nodpi/ic_launcher_monochrome.png",
+    "bytes": 10440,
+    "sha256": "9e5fcef97160194be375b8d52de94b02eb753c68752126b2a4f3b512ec5fa855"
+  },
+  {
+    "file": "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+    "bytes": 344,
+    "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+  },
+  {
+    "file": "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+    "bytes": 344,
+    "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+  },
+  {
+    "file": "app/src/main/res/mipmap-hdpi/ic_launcher.png",
+    "bytes": 4322,
+    "sha256": "bc3ba510f37236dfe2c06e76f44bb20c8fef9ff9717a8028fe1e33cf909907da"
+  },
+  {
+    "file": "app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+    "bytes": 4395,
+    "sha256": "88b64f4dcdf781a920aa2f6bb766e6ed5b28c9d8ba091f660d39d9b0f2ac15a1"
+  },
+  {
+    "file": "app/src/main/res/mipmap-mdpi/ic_launcher.png",
+    "bytes": 2686,
+    "sha256": "150239328b35902f497cdf58e4da9dddd68030b83a04e13b5bc662eeafbab216"
+  },
+  {
+    "file": "app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+    "bytes": 2713,
+    "sha256": "7b0d81be5acc0fc5ee37d5bcc27d64329df75ff810df959a9f4a2fe6cb114fd3"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+    "bytes": 6031,
+    "sha256": "c193dcc4729b60f40d2c85bbe367cd4d355732bd05f226010bd3fc93e24fc4eb"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+    "bytes": 6156,
+    "sha256": "d3160e8cb065a99431a2bd76b70550d72629be10582cae8a46c0d372ee402fd9"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+    "bytes": 9334,
+    "sha256": "e32e39a93b4bf4fc06e73f2e296216f6cdbe3912197708c39882b5f96d5b4b54"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+    "bytes": 9531,
+    "sha256": "5aea3a4eaebf6dc868167fe8c3b51702e9e2f9f259f0b093065e8d8d713c7984"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+    "bytes": 12780,
+    "sha256": "9e1e66e95dd572ad14dc91c30cccdbe63e92d405651d717adcb068e60073ad7f"
+  },
+  {
+    "file": "app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+    "bytes": 12987,
+    "sha256": "51304923a3c3588e77c7d1396e91e4cbd9a43e1b95aa343587724b879eb34075"
+  },
+  {
+    "file": "play-store-512.png",
+    "bytes": 30332,
+    "sha256": "bbaa4a82c580deecf589dbe3506dd8429135ccab966c3472faaeb01a05c27f5d"
+  },
+  {
+    "file": "source/adaptive-background-1024.png",
+    "bytes": 6493,
+    "sha256": "55d1e11e2e63bde27ab7e42d03b36008d5458ad589f2087c58f41dd9004e0c31"
+  },
+  {
+    "file": "source/adaptive-background.svg",
+    "bytes": 146,
+    "sha256": "2e657fba5e9f96c48b755e00ba952220c5864fecd4031e0042122116a2f8b89b"
+  },
+  {
+    "file": "source/adaptive-foreground-1024.png",
+    "bytes": 35952,
+    "sha256": "c045b1c0f620af2c136f4379577ff1cdd2e39f8bee82f4f8b2f7e13f5c02729a"
+  },
+  {
+    "file": "source/adaptive-foreground.svg",
+    "bytes": 2177,
+    "sha256": "aaea380af11bb1c01e6d27cab6a7b67d9cbe8b10e9b512db11b14d435d11e5b8"
+  },
+  {
+    "file": "source/launcher-1024.png",
+    "bytes": 72376,
+    "sha256": "c5cc2f390e07d83acc4667d1c7ce558d31d649da6dcd0300f63fbb0be2137f57"
+  },
+  {
+    "file": "source/launcher-master.svg",
+    "bytes": 2288,
+    "sha256": "57b6634e8768f49b37b496f90ad48d15658f44cab04c69959b14738d69f244b9"
+  },
+  {
+    "file": "source/themed-monochrome-1024.png",
+    "bytes": 10440,
+    "sha256": "9e5fcef97160194be375b8d52de94b02eb753c68752126b2a4f3b512ec5fa855"
+  },
+  {
+    "file": "source/themed-monochrome.svg",
+    "bytes": 593,
+    "sha256": "87854aeacccc747fd4f631f3e65bb7b1c3972c4f0e42e80b9758b9b167e1e996"
+  }
+]

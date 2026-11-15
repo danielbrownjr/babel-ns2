@@ -1,93 +1,50 @@
-# Eden NS2
+# Babel NS2
 
-A fork of the [Eden](https://git.eden-emu.dev/eden-emu/eden) Nintendo Switch emulator that runs
-Nintendo Switch 2 games.
+**In defiance of the Christian God.**
 
-![Donkey Kong Bananza gameplay](docs/ns2/screenshots/bananza-cave.png)
+Babel NS2 is an independently maintained, downstream distribution of [Eden NS2](https://github.com/Vivsi1/Eden-NS2-Android), initially focused on **Android ARM64** and Snapdragon/Adreno devices. It is not a rename of the official Eden application, an official Eden release, or a branch awaiting upstream acceptance.
 
-![Mario Kart World title screen](docs/ns2/screenshots/mario-kart-world-title.png)
+Babel intends to incorporate selected upstream improvements while controlling its own Android application identity, packaging, release decisions, and project direction. The original Eden installation and its user data must remain untouched.
 
-![Pokémon Pokopia gameplay](docs/ns2/screenshots/pokopia-gameplay.png)
+> **Development status (November 2026):** Babel's independent Android APK, package isolation, and device startup are still being developed. No verified Babel APK or successful AYN Odin 3 execution is claimed here. The screenshots and game compatibility observations inherited from Eden NS2 are **upstream evidence, not Babel Android test results**.
 
-## Status
+## Relationship and provenance
 
-| Game | State |
-| --- | --- |
-| Donkey Kong Bananza (`040074A01BF12000`, v7.0.0) | Playable; slow in some areas |
-| Mario Kart World (`0400C3F00006E000`, v1.8.0) | Playable; slow in some areas |
-| Pokémon Pokopia (`0400A3A01EE4C000`) | Playable; stable 60 FPS |
-| Splatoon Raiders (`0400380020056000`) | Playable; stable 60 FPS |
-| Nintendo Switch 2 Welcome Tour (`040057C02159A000`) | Boots; runs very slowly |
+The code lineage is **yuzu/Citra → Eden → Eden NS2 Android → Babel NS2**. Babel's immediate source was [Vivsi1/Eden-NS2-Android](https://github.com/Vivsi1/Eden-NS2-Android). The broader [Eden project](https://git.eden-emu.dev/eden-emu/eden) and its predecessors retain credit for their respective work. Upstream code, documentation, notices, and license obligations are not rebranded as original Babel work.
 
-### Known issues
+Babel will maintain its own `main` branch and review selected upstream updates on integration branches. See [upstream and distribution policy](docs/UPSTREAM.md) and the original [upstream README](docs/README.upstream.md).
 
-- **Performance:** still a work in progress; expect slowdowns and stutter.
-- **Donkey Kong Bananza:** destructible terrain is invisible on AMD GPUs.
-- **Mario Kart World:** loading screens can take a long time, especially the first time a course is
-  loaded. Recommended per-game settings: GPU accuracy Low, asynchronous shaders on, and ASTC
-  recompression BC3 (needed on GPUs with less than 8 GB of video memory). Some geometry
-  (task/mesh shaders) is missing, and character eye textures and shadows can look glitchy.
-- **Nintendo Switch 2 Welcome Tour:** reaches the intro and the tour, but runs very slowly.
+## Android direction
 
-## Building (Windows, MSYS2 MINGW64)
+| | Babel NS2 | Eden / Eden NS2 |
+| --- | --- | --- |
+| Project governance | Independent downstream maintenance | Separate upstream projects and maintainers |
+| Intended Android application ID | `dev.techbenders.babelns2` (M0 target, not yet verified in an APK) | Existing Eden package ID(s), unchanged by Babel's plans |
+| Branding | Babel name and Tower of Babel identity | Retains Eden's own identity |
+| Packaging and release | Babel-controlled, once validated | Upstream-controlled |
+| Current device verification | Not yet established | Do not infer from Babel or vice versa |
 
-1. Install [MSYS2](https://www.msys2.org) and, in a **MINGW64** shell, install the MinGW toolchain,
-   CMake, Ninja, Qt 6, FFmpeg, SDL3, Boost, OpenSSL and the Vulkan headers, plus git, patch and autotools
-   (for example `pacman -S --needed mingw-w64-x86_64-{toolchain,cmake,ninja,qt6,ffmpeg,sdl3,boost,openssl,vulkan-headers} git patch autotools`;
-   exact package names may differ — see [docs/Deps.md](docs/Deps.md)).
-2. Configure and build from the repository root:
+**M0 priority:** produce a valid ARM64 Android APK that installs alongside an existing Eden installation without replacing it or importing its preferences, saves, firmware, or caches. See the [Android build notes](docs/build/Android.md), which still include inherited upstream instructions and are not yet a verified Babel build procedure.
 
-   ```sh
-   cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DYUZU_TESTS=OFF \
-         -DENABLE_WERROR=OFF -DYUZU_ROOM=OFF -DYUZU_CMD=OFF -DENABLE_LIBUSB=OFF \
-         -Denet_FORCE_BUNDLED=ON -Dlibusb_FORCE_BUNDLED=ON -DVulkanMemoryAllocator_FORCE_BUNDLED=ON
-   ninja -C build yuzu
-   ```
+## Branding
 
-3. Copy the MinGW runtime DLLs (Qt and its dependencies) next to `build/bin/eden.exe` and add a
-   `build/bin/qt.conf` containing `[Paths]` / `Plugins = plugins` (see [docs/ns2/NOTES.md](docs/ns2/NOTES.md)).
+Babel's approved direction uses a monumental Tower of Babel / ziggurat motif, sunset palette, gold typography, and researched cuneiform artwork. The visual identity is distinct from Eden. The tagline is a project statement, not a claim about emulator capabilities or religious affiliation.
 
-The NS2 patch's MSVC script (`build-eden-msvc.bat`) is included but has not been tried with this tree.
+Read the [branding assets and provenance guide](docs/branding/README.md) before modifying artwork. The approved source files are currently in the project Drive and are not automatically bundled into an APK.
 
-## Building (Linux)
+## Compatibility and evidence
 
-Not tested yet; nothing in the changes is Windows-only.
+The inherited [Eden NS2 work log](docs/ns2/NOTES.md) records prior Switch 2 experiments and limitations. Those experiments must **not** be presented as Babel-on-Android results. Babel-specific compatibility claims require reproducible logs and hardware validation.
 
-1. Install the dependencies for your distribution; [docs/Deps.md](docs/Deps.md) has full commands for
-   Arch, Debian/Ubuntu/Mint, Fedora, Gentoo and others. For example:
+No commercial games, keys, firmware, or copyrighted game content are distributed with Babel. Users must provide lawfully obtained material where applicable.
 
-   ```sh
-   # Arch
-   sudo pacman -Syu --needed base-devel boost catch2 cmake enet ffmpeg fmt git glslang libzip lz4 ninja \
-        nlohmann-json openssl opus qt6-base qt6-multimedia qt6-charts sdl3 zlib zstd zip unzip \
-        vulkan-headers vulkan-utility-libraries libusb spirv-tools spirv-headers
-   ```
+## Contributing and documentation
 
-2. Configure and build from the repository root:
+- [Babel contribution guidelines](CONTRIBUTING.md)
+- [Development documentation](docs/README.md)
+- [AI assistance policy](docs/policies/AI.md)
+- [Coding guidelines](docs/policies/Coding.md)
 
-   ```sh
-   cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DYUZU_TESTS=OFF \
-         -DENABLE_WERROR=OFF
-   ninja -C build yuzu
-   ```
+## License and independence
 
-   If CMake cannot find a package your distribution doesn't ship (enet, libusb,
-   VulkanMemoryAllocator, ...), add the matching `-D<name>_FORCE_BUNDLED=ON` flag from the Windows
-   command above.
-3. The binary is `build/bin/eden`; no DLL copying is needed.
-
-## Running
-
-Use your own dumped games, keys and firmware. Load a game from its extracted dump (the `romfs`
-folder next to `exefs` is found automatically):
-
-```sh
-build/bin/eden -g "<dump>/updates/<version>/exefs/main"
-```
-
-Recommended settings: Vulkan, 12 GB memory layout, multi-core CPU.
-
-## Licence
-
-GPL-3.0-or-later, like Eden (see [LICENSE.txt](LICENSE.txt)). Not affiliated with the Eden project
-or Nintendo; no game data, keys or firmware are included.
+The repository retains [GPL-3.0-or-later licensing and notices](LICENSE.txt) alongside applicable file-level and third-party notices. Babel is **not affiliated with or endorsed by Eden, Vivsi1, Nintendo, or their contributors**. Fork independence does not erase upstream authorship or license requirements.
