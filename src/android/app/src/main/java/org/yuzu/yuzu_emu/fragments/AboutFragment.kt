@@ -61,15 +61,15 @@ class AboutFragment : Fragment() {
 
         if (BuildConfig.FLAVOR == "babel") {
             binding.imageLogo.setImageResource(R.mipmap.ic_launcher)
-        } else {
-            binding.imageLogo.setOnLongClickListener {
-                Toast.makeText(
-                    requireContext(),
-                    R.string.gaia_is_not_real,
-                    Toast.LENGTH_SHORT
-                ).show()
-                true
+        }
+        binding.imageLogo.setOnLongClickListener {
+            val message = if (BuildConfig.FLAVOR == "babel") {
+                R.string.babel_logo_easter_egg
+            } else {
+                R.string.gaia_is_not_real
             }
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            true
         }
 
         binding.buttonContributors.setOnClickListener {
