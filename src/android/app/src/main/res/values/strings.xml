@@ -480,6 +480,7 @@
 
     <!-- About screen strings -->
     <string name="gaia_is_not_real">Gaia isn\'t real</string>
+    <string name="babel_logo_easter_egg" translatable="false">God is dead. Babel lives.</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="about_app_description">An open-source Switch emulator</string>
     <string name="contributors">Contributors</string>
